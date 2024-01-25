@@ -29,7 +29,10 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['8000-ktay0557-project-4-pvdir6bbjo.us2.codeanyapp.com']
+ALLOWED_HOSTS = [
+    '8000-ktay0557-project-4-pvdir6bbjo.us2.codeanyapp.com',
+    '.herokuapp.com'
+]
 
 
 # Application definition
