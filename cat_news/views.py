@@ -6,4 +6,5 @@ from .models import Post
 
 
 class NewsList(generic.ListView):
-    model = Post
+    queryset = Post.objects.filter(status=1)
+    template_name = "post_list.html"
