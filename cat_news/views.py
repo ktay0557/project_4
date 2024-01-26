@@ -7,4 +7,5 @@ from .models import Post
 
 class NewsList(generic.ListView):
     queryset = Post.objects.filter(status=1)
-    template_name = "post_list.html"
+    template_name = "cat_news/index.html"
+    paginate_by = 9
