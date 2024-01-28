@@ -1,8 +1,27 @@
 {% extends "base.html" %} {% load static %} {% block content %}
+<!-- Form tags-->
+{% load crispy_forms_tags %}
 
 <!-- index.html content starts here -->
 <div class="container-fluid">
   <div class="row">
+    <!-- New story section -->
+    <div class="col-md-4 card mb-4 mt-3">
+      <div class="card-body">
+        {% if user.is_authenticated %}
+        <h3>Post a News Story:</h3>
+        <p>Posting as: {{ user.username }}</p>
+        <form id="postForm" method="post" style="margin-top: 1.3em">
+          {{ post_form | crispy }} {% csrf_token %}
+          <button id="submitButton" type="submit" class="btn btn-signup btn-lg">
+            Submit
+          </button>
+        </form>
+        {% else %}
+        <p>Please sign up or log in to be able to post</p>
+        {% endif %}
+      </div>
+    </div>
     <!-- News Stories Entries Column -->
     <div class="col-12 mt-3 left">
       <div class="row">

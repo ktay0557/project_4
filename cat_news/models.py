@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
@@ -12,7 +13,7 @@ class Post(models.Model):
     Stores a news story post related to :model:`auth.User`.
     """
     title = models.CharField(max_length=200, unique=True)
-    slug = models.SlugField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True, blank=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="news_stories"
     )
@@ -28,6 +29,13 @@ class Post(models.Model):
 
     def __str__(self):
         return f"{self.title} | written by {self.author}"
+
+    def save(self, *args, **kwargs):
+        """
+        Generate a slug based on the title, when post is saved.
+        """
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
 
 class Comment(models.Model):

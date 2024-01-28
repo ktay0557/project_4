@@ -1,9 +1,9 @@
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .models import Post, Comment
-from .forms import CommentForm
+from .forms import CommentForm, PostForm
 
 # Create your views here.
 
@@ -27,6 +27,25 @@ class NewsList(generic.ListView):
     queryset = Post.objects.filter(status=1)
     template_name = "cat_news/index.html"
     paginate_by = 6
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Pass an instance of the form to the template
+        context['post_form'] = PostForm()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        if request.method == "POST":
+            post_form = PostForm(data=request.POST)
+            if post_form.is_valid():
+                post = post_form.save(commit=False)
+                post.author = request.user
+                post.save()
+                messages.add_message(
+                    request, messages.SUCCESS,
+                    'Your story has been submitted and is awaiting approval'
+                )
+                return redirect('home')
 
 
 def post_detail(request, slug):
