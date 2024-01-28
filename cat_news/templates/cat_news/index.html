@@ -17,7 +17,7 @@
                   src="{% static 'images/kevin.jpg' %}"
                   alt="placeholder image"
                 />
-                {& else &}
+                {% else %}
                 <img
                   class="card-img-top"
                   src=" {{ post.featured_image.url }}"
