@@ -1,0 +1,20 @@
+const editButtons = document.getElementsByClassName("btn-edit");
+const commentText = document.getElementById("id_body");
+const commentForm = document.getElementById("commentForm");
+const submitButton = document.getElementById("submitButton");
+
+/** 
+ * Gives functionality to the edit button in comments section.
+ * Allows user to edit their previous comments.
+ * Updates the submit button when editing to 'update'.
+ */
+
+for (let button of editButtons) {
+    button.addEventListener("click", (e) => {
+        let commentId = e.target.getAttribute("comment_id");
+        let commentContent = document.getElementById(`comment${commentId}`).innerText;
+        commentText.value = commentContent;
+        submitButton.innerText = "Update";
+        commentForm.setAttribute("action", `edit_comment/${commentId}`);
+    });
+}

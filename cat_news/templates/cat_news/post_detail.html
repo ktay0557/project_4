@@ -61,6 +61,10 @@
           </div>
           {% if not comment.approved and comment.author == user %}
           <p class="approval">This comment is awaiting approval</p>
+          {% endif %} {% if user.is_authenticated and comment.author == user %}
+          <button class="btn btn-edit" comment_id="{{ comment.id }}">
+            Edit
+          </button>
           {% endif %}
         </div>
         {% endfor %}
@@ -87,3 +91,8 @@
 </div>
 
 {% endblock content %}
+
+<!-- JavaScript -->
+{% block extras %}
+<script src="{% static 'js/comments.js' %}"></script>
+{% endblock %}
