@@ -29,5 +29,10 @@ class PostForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         # set the required to false, so user can choose to include image
         self.fields['featured_image'].required = False
-        # set excerpt required to true, so the user must include one
+        """
+        Set excerpt required to true, so the user must include one.
+        Adjust size of textarea
+        """
         self.fields['excerpt'].required = True
+        self.fields['excerpt'].widget.attrs['cols'] = 40
+        self.fields['excerpt'].widget.attrs['rows'] = 4
