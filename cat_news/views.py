@@ -29,12 +29,26 @@ class NewsList(generic.ListView):
     paginate_by = 9
 
     def get_context_data(self, **kwargs):
+        """
+        Pass an instance of the form to the template
+        """
         context = super().get_context_data(**kwargs)
-        # Pass an instance of the form to the template
         context['post_form'] = PostForm()
         return context
 
     def post(self, request, *args, **kwargs):
+         """
+         Display an instance of :form:`cat_news.postForm`.
+
+         **Context**
+
+         ``post_form``
+         An instance of :form:`cat_news.postForm`.
+         Allows user to post a story.
+
+         **Template:**
+         :template:`cat_news/index.html`
+         """
         if request.method == "POST":
             post_form = PostForm(data=request.POST)
             if post_form.is_valid():
