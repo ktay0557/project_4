@@ -37,18 +37,18 @@ class NewsList(generic.ListView):
         return context
 
     def post(self, request, *args, **kwargs):
-         """
-         Display an instance of :form:`cat_news.postForm`.
+        """
+        Display an instance of :form:`cat_news.postForm`.
 
-         **Context**
+        **Context**
 
-         ``post_form``
-         An instance of :form:`cat_news.postForm`.
-         Allows user to post a story.
+        ``post_form``
+        An instance of :form:`cat_news.postForm`.
+        Allows user to post a story.
 
-         **Template:**
-         :template:`cat_news/index.html`
-         """
+        **Template:**
+        :template:`cat_news/index.html`
+        """
         if request.method == "POST":
             post_form = PostForm(data=request.POST)
             if post_form.is_valid():
