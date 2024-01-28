@@ -5,6 +5,9 @@ from cloudinary.models import CloudinaryField
 
 
 class About(models.Model):
+    """
+    Stores a single entry of the about us text.
+    """
     title = models.CharField(max_length=200, unique=True)
     content = models.TextField()
     profile_image = CloudinaryField('image', default='placeholder')
@@ -15,6 +18,9 @@ class About(models.Model):
 
 
 class ContactRequest(models.Model):
+    """
+    Stores a single entry of a contact enquiry message.
+    """
     name = models.CharField(max_length=200)
     email = models.EmailField()
     message = models.TextField()

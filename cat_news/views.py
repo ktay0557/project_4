@@ -9,6 +9,21 @@ from .forms import CommentForm
 
 
 class NewsList(generic.ListView):
+    """
+    Returns all the published posts in :model:`cat_news.Post`,
+    and displays them in a page of six posts.
+
+    **Context**
+
+    ``queryset``
+        All published instances of :model:`cat_news.Post`
+    ``paginated_by``
+        The number of posts to a page.
+
+    **Template:**
+
+    :template:`cat_news/index.html`
+    """
     queryset = Post.objects.filter(status=1)
     template_name = "cat_news/index.html"
     paginate_by = 6
@@ -22,6 +37,12 @@ def post_detail(request, slug):
 
     ``post``
         An instance of :model:`cat_news.Post`.
+    ``comments``
+        All o9f the approved comments relating to the post.
+    ``comment_count``
+        A count of all the approved comments relating to the post.
+    ``comment_form``
+        An instance of :form:`cat_news.CommentForm`
 
     **Template:**
 
@@ -40,7 +61,8 @@ def post_detail(request, slug):
             comment.post = post
             comment.save()
             messages.add_message(
-                request, messages.SUCCESS, 'Your comment has been submitted and is awaiting approval'
+                request, messages.SUCCESS,
+                'Your comment has been submitted and is awaiting approval'
             )
 
     comment_form = CommentForm()
@@ -59,7 +81,16 @@ def post_detail(request, slug):
 
 def comment_edit(request, slug, comment_id):
     """
-    for editting comments
+    Displays a single comment for editting.
+
+    **Context**
+
+    ``post``
+        An instance of :model:`cat_news.Post`.
+    ``comment``
+        A single comment relating to the post.
+    ``comment_form``
+        An instance of :form:`cat_news.CommentForm`.
     """
     if request.method == 'POST':
 
@@ -78,7 +109,8 @@ def comment_edit(request, slug, comment_id):
             )
         else:
             messages.add_message(
-                request, messages.ERROR, 'There was an error updating your comment'
+                request, messages.ERROR,
+                'There was an error updating your comment'
             )
 
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
@@ -86,7 +118,14 @@ def comment_edit(request, slug, comment_id):
 
 def comment_delete(request, slug, comment_id):
     """
-    for deleting comments
+    To delete a single comment.
+
+    **Context**
+
+    ``post``
+        An instance of :model:`cat_news.Post`.
+    ``comment``
+        A single comment relating to the post.
     """
     queryset = Post.objects.filter(status=1)
     post = get_object_or_404(queryset, slug=slug)
