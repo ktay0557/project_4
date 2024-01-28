@@ -11,7 +11,7 @@ from .forms import CommentForm, PostForm
 class NewsList(generic.ListView):
     """
     Returns all the published posts in :model:`cat_news.Post`,
-    and displays them in a page of six posts.
+    and displays them in a page of nine posts.
 
     **Context**
 
@@ -26,7 +26,7 @@ class NewsList(generic.ListView):
     """
     queryset = Post.objects.filter(status=1)
     template_name = "cat_news/index.html"
-    paginate_by = 6
+    paginate_by = 9
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
