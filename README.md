@@ -26,7 +26,7 @@ Registered users are able to leave comments on stories, as well as edit and dele
 | --------------- |
 | Built-in model  |
 
-|                     Post                  |
+|            |      Post      |             |
 | ---------- | -------------- | ------------|
 |            | title          | Char        |
 |            | slug           | Slug        |
@@ -38,26 +38,26 @@ Registered users are able to leave comments on stories, as well as edit and dele
 |            | excerpt        | Text        |
 |            | edited_on      | DateTime    |
 
-|                Comment                |
+|            |   Comment  |             |
 | ---------- | ---------- | ------------|
 | ForeignKey | post       | Post Model  |
 | ForeignKey | author     | User model  |
 |            | approved   | Boolean     |
 |            | created_on | DateTime    |
 
-|               About               |
+|      |     About     |            |
 | ---- | ------------- | -----------|
 |      | title         | Char       |
 |      | content       | Text       |
 |      | profile_image | Cloudinary |
 |      | edited_on     | DateTime   |
 
-|      Contact Request       |
-| ---- | -------- | ---------|
-|      | name     | Char     |
-|      | email    | Email    |
-|      | message  | Text     |
-|      | read     | Boolean  |
+|      |Contact Request |          |
+| ---- | -------------- | ---------|
+|      | name           | Char     |
+|      | email          | Email    |
+|      | message        | Text     |
+|      | read           | Boolean  |
 
 ## User Experience (UX)
 
